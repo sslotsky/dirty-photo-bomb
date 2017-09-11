@@ -10,10 +10,22 @@ function request(url, options = {}) {
       throw new NetworkError(resp);
     }
 
-    return resp;
+    return resp.json();
   });
 }
 
 export function get(url) {
   return request(url);
 }
+
+const host = "http://10.0.0.235:9999";
+const route = path => `${host}/${path}`;
+const apiRoute = path => route(`v1/${path}`);
+
+export const assetPath = filename => route(`assets/${filename}`)
+
+export default {
+  photos: {
+    list: () => get(apiRoute("photos"))
+  }
+};
