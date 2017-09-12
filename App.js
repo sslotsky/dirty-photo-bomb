@@ -1,33 +1,25 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import PhotoList from "./PhotoList";
-import { NativeRouter, Route, Link } from "react-router-native";
+import { View, StyleSheet } from "react-native";
+import { NativeRouter, Route, AndroidBackButton } from "react-router-native";
+import PhotoListContainer from "./PhotoListContainer";
+import Photo from "./Photo";
 import api from "./api";
 
 export default class App extends React.Component {
-  state = {
-    photos: [],
-    error: false
-  };
-
-  componentDidMount() {
-    api.photos.list().then(({ photos }) => {
-      this.setState({ photos });
-    });
-  }
-
   render() {
     return (
       <NativeRouter>
-        <Route
-          path="/"
-          exact
-          component={() => (
-            <View style={styles.container}>
-              <PhotoList photos={this.state.photos} />
-            </View>
-          )}
-        />
+        <AndroidBackButton>
+          <View style={styles.container}>
+            <Route path="/" exact component={PhotoListContainer} />
+            <Route
+              path="/photos/:filename"
+              component={({ match }) => (
+                <Photo filename={match.params.filename} />
+              )}
+            />
+          </View>
+        </AndroidBackButton>
       </NativeRouter>
     );
   }
@@ -35,6 +27,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff"
+    flex: 1
   }
 });
