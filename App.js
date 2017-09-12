@@ -1,9 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PhotoList from "./PhotoList";
+import { NativeRouter, Route, Link } from "react-router-native";
 import api from "./api";
-
-const host = "http://10.0.0.235:9999";
 
 export default class App extends React.Component {
   state = {
@@ -19,17 +18,23 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <PhotoList photos={this.state.photos} />
-      </View>
+      <NativeRouter>
+        <Route
+          path="/"
+          exact
+          component={() => (
+            <View style={styles.container}>
+              <PhotoList photos={this.state.photos} />
+            </View>
+          )}
+        />
+      </NativeRouter>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center"
+    backgroundColor: "#fff"
   }
 });

@@ -18,11 +18,12 @@ export function get(url) {
   return request(url);
 }
 
-const host = "http://10.0.0.235:9999";
-const route = path => `${host}/${path}`;
+const host = process.env.HOST;
+const base = `http://${host}:9999`;
+const route = path => `${base}/${path}`;
 const apiRoute = path => route(`v1/${path}`);
 
-export const assetPath = filename => route(`assets/${filename}`)
+export const assetPath = filename => route(`assets/${filename}`);
 
 export default {
   photos: {
