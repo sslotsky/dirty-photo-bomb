@@ -4,7 +4,7 @@ import PhotoListItem from "./PhotoListItem";
 
 export default function PhotoList({ photos }) {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={photos}
         numColumns={3}

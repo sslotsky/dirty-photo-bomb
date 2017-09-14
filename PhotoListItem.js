@@ -5,10 +5,10 @@ import { assetPath } from "./api";
 
 export default function PhotoListItem({ filename }) {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Link to={`/photos/${filename}`}>
         <Image
-          style={{ width: 100, height: 100, margin: 5 }}
+          style={{ height: 100, margin: 5 }}
           source={{ uri: assetPath(filename) }}
         />
       </Link>

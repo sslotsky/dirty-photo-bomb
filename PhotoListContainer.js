@@ -8,14 +8,12 @@ export default class PhotoListContainer extends React.Component {
   };
 
   componentDidMount() {
-    api.photos.list().then(({ photos }) => {
+    api.photos.list().then(photos => {
       this.setState({ photos });
     });
   }
 
   render() {
-    return (
-      <PhotoList photos={this.state.photos} />
-    );
+    return <PhotoList photos={this.state.photos} />;
   }
 }
