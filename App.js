@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StatusBar } from "react-native";
 import { NativeRouter, Route, AndroidBackButton } from "react-router-native";
 import PhotoListContainer from "./PhotoListContainer";
 import Photo from "./Photo";
@@ -11,6 +11,7 @@ export default class App extends React.Component {
       <NativeRouter>
         <AndroidBackButton>
           <View style={styles.container}>
+            <StatusBar hidden />
             <Route path="/" exact component={PhotoListContainer} />
             <Route
               path="/photos/:filename"
