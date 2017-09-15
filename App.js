@@ -14,8 +14,8 @@ export default class App extends React.Component {
             <Route path="/" exact component={PhotoListContainer} />
             <Route
               path="/photos/:filename"
-              component={({ match }) => (
-                <Photo filename={match.params.filename} />
+              component={({ match, history }) => (
+                <Photo back={history.goBack} filename={match.params.filename} />
               )}
             />
           </View>
