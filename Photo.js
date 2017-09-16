@@ -3,6 +3,7 @@ import { View, Image, Button } from "react-native";
 import Nav from "./Nav";
 import api, { assetPath } from "./api";
 import notificationService from "./notificationService";
+import Animated from "./Animated";
 
 const service = notificationService();
 
@@ -15,16 +16,18 @@ export default function Photo({ filename, back }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "dimgray" }}>
       <Nav>
         <Button color="darkmagenta" title="Back" onPress={back} />
         <Button color="darkmagenta" title="Print" onPress={print} />
       </Nav>
-      <Image
-        resizeMode="contain"
-        style={{ flex: 1 }}
-        source={{ uri: assetPath(filename) }}
-      />
+      <Animated>
+        <Image
+          resizeMode="contain"
+          style={{ flex: 1 }}
+          source={{ uri: assetPath(filename) }}
+        />
+      </Animated>
     </View>
   );
 }

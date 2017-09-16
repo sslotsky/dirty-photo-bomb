@@ -4,11 +4,13 @@ import PhotoListItem from "./PhotoListItem";
 import Nav from "./Nav";
 import { PLACEHOLDER } from "./constants";
 
+const COLUMNS = 3;
+
 export default function PhotoList({ photos, diff, refresh }) {
-  const remainder = photos.length % 3;
+  const remainder = photos.length % COLUMNS;
   const items = remainder === 0
     ? photos
-    : photos.concat(Array(3 - remainder).fill(PLACEHOLDER));
+    : photos.concat(Array(COLUMNS - remainder).fill(PLACEHOLDER));
 
   return (
     <View style={{ flex: 1 }}>
@@ -18,7 +20,7 @@ export default function PhotoList({ photos, diff, refresh }) {
       </Nav>
       <FlatList
         data={items}
-        numColumns={3}
+        numColumns={COLUMNS}
         onRefresh={refresh}
         refreshing={false}
         renderItem={({ item }) => {

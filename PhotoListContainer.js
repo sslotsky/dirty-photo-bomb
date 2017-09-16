@@ -1,6 +1,8 @@
 import React from "react";
 import PhotoList from "./PhotoList";
-import api from "./api";
+import photoService from "./photoService";
+
+const service = photoService();
 
 export default class PhotoListContainer extends React.Component {
   state = {
@@ -8,24 +10,19 @@ export default class PhotoListContainer extends React.Component {
     queued: []
   };
 
+  queue = photos => this.setState({ queued: photos });
+
   componentDidMount() {
-    api.photos.list().then(photos => {
+    service.retrieve().then(photos => {
       this.setState({ photos, queued: photos });
+      service.subscribe(this.queue);
     });
-
-    this.poll = setInterval(this.check, 5000);
   }
-
-  check = () => {
-    api.photos.list().then(photos => {
-      this.setState({ queued: photos });
-    });
-  };
 
   refresh = () => this.setState(({ queued }) => ({ photos: queued }));
 
   componentWillUnmount() {
-    clearInterval(this.poll);
+    service.unsubscribe(this.queue);
   }
 
   render() {
