@@ -10,10 +10,11 @@ export default function service() {
       listeners.splice(listeners.indexOf(listener), 1);
 
     let photos = [];
-    const fetch = () => api.photos.list().then(result => {
-      photos = result;
-      return result;
-    });
+    const fetch = () =>
+      api.photos.list().then(result => {
+        photos = result;
+        return result;
+      });
 
     const retrieve = () => {
       if (photos.length) {
