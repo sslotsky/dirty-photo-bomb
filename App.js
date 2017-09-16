@@ -1,6 +1,7 @@
 import React from "react";
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet, StatusBar, Text } from "react-native";
 import { NativeRouter, Route, AndroidBackButton } from "react-router-native";
+import Notice from "./Notice";
 import PhotoListContainer from "./PhotoListContainer";
 import Photo from "./Photo";
 import api from "./api";
@@ -19,6 +20,7 @@ export default class App extends React.Component {
                 <Photo back={history.goBack} filename={match.params.filename} />
               )}
             />
+            <Notice />
           </View>
         </AndroidBackButton>
       </NativeRouter>
