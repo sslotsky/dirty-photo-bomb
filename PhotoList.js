@@ -13,6 +13,8 @@ export default function PhotoList({ photos, diff, refresh }) {
       <FlatList
         data={photos}
         numColumns={3}
+        onRefresh={refresh}
+        refreshing={false}
         renderItem={({ item }) => {
           return <PhotoListItem filename={item} />;
         }}
