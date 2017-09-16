@@ -7,8 +7,12 @@ export default function Photo({ filename, back }) {
   return (
     <View style={{ flex: 1 }}>
       <Nav>
-        <Button title="Back" onPress={back} />
-        <Button title="Print" onPress={() => api.photos.print(filename)} />
+        <Button color="darkmagenta" title="Back" onPress={back} />
+        <Button
+          color="darkmagenta"
+          title="Print"
+          onPress={() => api.photos.print(filename)}
+        />
       </Nav>
       <Image
         resizeMode="contain"
