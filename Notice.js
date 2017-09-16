@@ -6,7 +6,7 @@ const service = notificationService();
 
 export default class Notice extends Component {
   state = {
-    message: null
+    messages: {}
   };
 
   componentDidMount() {
@@ -17,16 +17,26 @@ export default class Notice extends Component {
     service.unsubscribe(this.publish);
   }
 
-  publish = message => {
-    this.setState({ message });
-    setTimeout(() => this.setState({ message: null }), 3000);
+  publish = (message, id) => {
+    this.setState(state => {
+      const messages = { ...state.messages, [id]: message };
+      return { ...state, messages };
+    });
+
+    setTimeout(() => {
+      this.setState(state => {
+        const newState = { ...state };
+        delete newState.messages[id];
+        return newState;
+      });
+    }, 4000);
   };
 
   render() {
-    const { message } = this.state;
+    const messages = Object.values(this.state.messages);
 
     return (
-      message &&
+      messages.length > 0 &&
       <View
         style={{
           position: "absolute",
@@ -38,7 +48,9 @@ export default class Notice extends Component {
           borderRadius: 5
         }}
       >
-        <Text style={{ color: "white" }}>{message}</Text>
+        {messages.map((m, i) => (
+          <Text key={`${m}-${i}`} style={{ color: "white" }}>{m}</Text>
+        ))}
       </View>
     );
   }
