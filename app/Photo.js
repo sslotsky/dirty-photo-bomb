@@ -19,7 +19,6 @@ export default function Photo({ filename, back }) {
     <View
       style={{
         flex: 1,
-        backgroundColor: "dimgray",
         justifyContent: "space-between"
       }}
     >

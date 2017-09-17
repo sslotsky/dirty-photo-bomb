@@ -2,19 +2,18 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import notificationService from "./notificationService";
 
-const service = notificationService();
-
 export default class Notice extends Component {
   state = {
     messages: {}
   };
 
   componentDidMount() {
-    service.subscribe(this.publish);
+    this.service = notificationService();
+    this.service.subscribe(this.publish);
   }
 
   componentWillUnmount() {
-    service.unsubscribe(this.publish);
+    this.service.unsubscribe(this.publish);
   }
 
   publish = (message, id) => {

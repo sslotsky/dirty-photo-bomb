@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, StatusBar, Text } from "react-native";
 import { NativeRouter, Route, AndroidBackButton } from "react-router-native";
-import Notice from "./Notice";
-import PhotoListContainer from "./PhotoListContainer";
-import Photo from "./Photo";
-import api from "./api";
+import Notice from "./app/Notice";
+import PhotoListContainer from "./app/PhotoListContainer";
+import Photo from "./app/Photo";
+import api from "./app/api";
 
 export default class App extends React.Component {
   render() {
@@ -30,6 +30,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "dimgray"
   }
 });
