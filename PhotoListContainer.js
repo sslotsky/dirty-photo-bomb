@@ -2,8 +2,6 @@ import React from "react";
 import PhotoList from "./PhotoList";
 import photoService from "./photoService";
 
-const service = photoService();
-
 export default class PhotoListContainer extends React.Component {
   state = {
     photos: [],
@@ -13,16 +11,17 @@ export default class PhotoListContainer extends React.Component {
   queue = photos => this.setState({ queued: photos });
 
   componentDidMount() {
-    service.retrieve().then(photos => {
+    this.service = photoService();
+    this.service.retrieve().then(photos => {
       this.setState({ photos, queued: photos });
-      service.subscribe(this.queue);
+      this.service.subscribe(this.queue);
     });
   }
 
   refresh = () => this.setState(({ queued }) => ({ photos: queued }));
 
   componentWillUnmount() {
-    service.unsubscribe(this.queue);
+    this.service.unsubscribe(this.queue);
   }
 
   render() {

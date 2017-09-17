@@ -1,13 +1,11 @@
 import api from "./api";
+import createService from "./service";
 
 let photoService = null;
 
 export default function service() {
   if (!photoService) {
-    const listeners = [];
-    const subscribe = listener => listeners.push(listener);
-    const unsubscribe = listener =>
-      listeners.splice(listeners.indexOf(listener), 1);
+    const s = createService();
 
     let photos = [];
     const fetch = () =>
@@ -24,10 +22,10 @@ export default function service() {
       return fetch();
     };
 
-    photoService = { subscribe, unsubscribe, retrieve };
+    photoService = { ...s, retrieve };
 
     setInterval(() => {
-      fetch().then(photos => listeners.forEach(l => l(photos)));
+      fetch().then(photoService.notify);
     }, 5000);
   }
 
