@@ -1,12 +1,12 @@
 import React from "react";
 import { View, FlatList, Button } from "react-native";
 import PhotoListItem from "./PhotoListItem";
-import Nav from "./Nav";
+import Dock from "./Dock";
 import { PLACEHOLDER } from "./constants";
 
 const COLUMNS = 3;
 
-export default function PhotoList({ photos, diff, refresh }) {
+export default function PhotoList({ photos, refresh, diff, viewPhoto }) {
   const remainder = photos.length % COLUMNS;
   const items = remainder === 0
     ? photos
@@ -14,20 +14,22 @@ export default function PhotoList({ photos, diff, refresh }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <Nav>
-        {diff > 0 &&
-          <Button onPress={refresh} title={`${diff} photos waiting`} />}
-      </Nav>
       <FlatList
         data={items}
         numColumns={COLUMNS}
         onRefresh={refresh}
         refreshing={false}
         renderItem={({ item }) => {
-          return <PhotoListItem filename={item} />;
+          return (
+            <PhotoListItem filename={item} viewPhoto={() => viewPhoto(item)} />
+          );
         }}
         keyExtractor={(_, index) => index}
       />
+      <Dock>
+        {diff > 0 &&
+          <Button onPress={refresh} title={`${diff} photos waiting`} />}
+      </Dock>
     </View>
   );
 }

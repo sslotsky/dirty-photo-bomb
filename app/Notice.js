@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
+import Dock from "./Dock";
 import notificationService from "./notificationService";
 
 export default class Notice extends Component {
@@ -36,21 +37,19 @@ export default class Notice extends Component {
 
     return (
       messages.length > 0 &&
-      <View
+      <Dock
         style={{
-          position: "absolute",
           right: 10,
           top: 50,
           padding: 10,
-          zIndex: 1,
-          backgroundColor: "#00ff00",
+          backgroundColor: "lime",
           borderRadius: 5
         }}
       >
         {messages.map((m, i) => (
           <Text key={`${m}-${i}`} style={{ color: "white" }}>{m}</Text>
         ))}
-      </View>
+      </Dock>
     );
   }
 }

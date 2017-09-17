@@ -3,6 +3,9 @@ import createService from "./service";
 
 let photoService = null;
 
+export const MORE = "photos/MORE";
+export const INCOMING = "photos/INCOMING";
+
 export default function service() {
   if (!photoService) {
     const s = createService();

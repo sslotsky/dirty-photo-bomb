@@ -8,30 +8,37 @@ export default class PhotoListContainer extends React.Component {
     queued: []
   };
 
-  queue = photos => this.setState({ queued: photos });
-
   componentDidMount() {
     this.service = photoService();
-    this.service.retrieve().then(photos => {
-      this.setState({ photos, queued: photos });
-      this.service.subscribe(this.queue);
-    });
+    this.refresh();
+    this.service.subscribe(this.listen);
   }
-
-  refresh = () => this.setState(({ queued }) => ({ photos: queued }));
 
   componentWillUnmount() {
-    this.service.unsubscribe(this.queue);
+    this.service.unsubscribe(this.listen);
   }
+
+  refresh = () => {
+    this.service
+      .retrieve()
+      .then(photos => this.setState({ photos, queued: photos }));
+  };
+
+  listen = photos => {
+    this.setState({ queued: photos });
+  };
 
   render() {
     const { photos, queued } = this.state;
+    const { navigation } = this.props;
+    const viewPhoto = filename => navigation.navigate("Photo", { filename });
 
     return (
       <PhotoList
         photos={photos}
-        diff={queued.length - photos.length}
         refresh={this.refresh}
+        viewPhoto={viewPhoto}
+        diff={queued.length - photos.length}
       />
     );
   }
