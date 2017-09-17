@@ -8,7 +8,8 @@ export default function Nav({ children }) {
         padding: 15,
         flexDirection: "row",
         justifyContent: "flex-start",
-        backgroundColor: "#2f4f4f"
+        backgroundColor: "#2f4f4f",
+        height: 65
       }}
     >
       <Text style={{ color: "white" }}>Photo Booth</Text>

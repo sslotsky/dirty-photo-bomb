@@ -16,18 +16,26 @@ export default function Photo({ filename, back }) {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "dimgray" }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "dimgray",
+        justifyContent: "space-between"
+      }}
+    >
       <Nav>
         <Button color="darkmagenta" title="Back" onPress={back} />
         <Button color="darkmagenta" title="Print" onPress={print} />
       </Nav>
-      <Animated>
-        <Image
-          resizeMode="contain"
-          style={{ flex: 1 }}
-          source={{ uri: assetPath(filename) }}
-        />
-      </Animated>
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <Animated>
+          <Image
+            resizeMode="contain"
+            style={{ flex: 1 }}
+            source={{ uri: assetPath(filename) }}
+          />
+        </Animated>
+      </View>
     </View>
   );
 }

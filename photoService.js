@@ -26,7 +26,7 @@ export default function service() {
 
     setInterval(() => {
       fetch().then(photoService.notify);
-    }, 5000);
+    }, 10000);
   }
 
   return photoService;
