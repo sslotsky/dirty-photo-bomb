@@ -1,5 +1,6 @@
 import React from "react";
-import { View, FlatList, Button } from "react-native";
+import { View, FlatList } from "react-native";
+import Button from "./Button";
 import PhotoListItem from "./PhotoListItem";
 import Dock from "./Dock";
 import { PLACEHOLDER } from "./constants";

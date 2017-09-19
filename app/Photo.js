@@ -1,10 +1,11 @@
 import React from "react";
-import { ScrollView, View, Image, Button } from "react-native";
+import { ScrollView, View, Image } from "react-native";
 import Nav from "./Nav";
 import api, { assetPath } from "./api";
 import notificationService from "./notificationService";
 import Animated from "./Animated";
 import Dock from "./Dock";
+import Button from "./Button";
 
 const service = notificationService();
 
