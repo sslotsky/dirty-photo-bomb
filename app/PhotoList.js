@@ -22,7 +22,10 @@ export default function PhotoList({ photos, refresh, diff, viewPhoto }) {
         refreshing={false}
         renderItem={({ item }) => {
           return (
-            <PhotoListItem filename={item} viewPhoto={() => viewPhoto(item)} />
+            <PhotoListItem
+              filename={item.thumbnail}
+              viewPhoto={() => viewPhoto(item)}
+            />
           );
         }}
         keyExtractor={(_, index) => index}

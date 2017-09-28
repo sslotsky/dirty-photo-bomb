@@ -31,7 +31,8 @@ export default class PhotoListContainer extends React.Component {
   render() {
     const { photos, queued } = this.state;
     const { navigation } = this.props;
-    const viewPhoto = filename => navigation.navigate("Photo", { filename });
+    const viewPhoto = ({ filename }) =>
+      navigation.navigate("Photo", { filename });
 
     return (
       <PhotoList
